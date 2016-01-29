@@ -1,21 +1,27 @@
 //https://www.codeeval.com/open_challenges/4/
-function isPrime(n) {
-    var x = 2;
-    for(x;x<n;x++) {
-        if(n % x === 0) {
+
+'use strict';
+
+const isPrime = (n) => {
+    for (let x = 2; x < n; x++) {
+        if (n % x === 0) {
             return false;
         }
     }
     return true;
-}
+};
 
-var count = 0, i = 0, total = -1;
+let count = 0,
+    i = 0,
+    total = -1;
 
-while(count < 1001) {
+while (count <= 1000) {
     i++;
-    if(isPrime(i)) {
+
+    if (isPrime(i)) {
         count++;
-        total+=i;
+        total += i;
     }
 }
-console.log(total);
+
+console.log(total); // 3682913
