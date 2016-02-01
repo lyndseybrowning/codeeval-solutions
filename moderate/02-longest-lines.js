@@ -1,22 +1,27 @@
 //https://www.codeeval.com/open_challenges/2/
 
-var fs = require("fs");
-var numLines;
-var lines = [];
+var fs = require('fs'),
+    maxLines = 0,
+    allLinesArray = [],
+    maxLinesArray = [];
 
-fs.readFileSync(process.argv[2]).toString().split('\n').forEach(function (line,index) {
-    if (line !== "") {
-       if(index > 0) {
-            line = line.trim();
-            lines.push(line);
-        }
-        else {
-            numLines = line;
-        }
+fs.readFileSync('test.txt').toString().split('\n').forEach(function (line, index) {
+    if (line !== '') {
+
+       if(index === 0) {
+         maxLines = line;
+       } else {
+         if(!allLinesArray.length || line.length < allLinesArray[0].length) {
+           allLinesArray.push(line);
+         } else {
+           allLinesArray.unshift(line);
+         }
+       }
     }
 });
 
-lines = lines.sort(function(a,b) { return b.length-a.length });
-for(var i = 0; i<numLines; i++) {
-    console.log(lines[i]);
-}
+maxLinesArray = allLinesArray.filter(function(line, index) {
+  return index < maxLines;
+});
+
+console.log(maxLinesArray.join('\n'));
