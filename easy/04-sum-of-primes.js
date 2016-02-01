@@ -1,27 +1,26 @@
 //https://www.codeeval.com/open_challenges/4/
 
-'use strict';
+var sumOfPrimes = function(maxPrimes, numPrimes, sum, iterator) {
 
-const isPrime = (n) => {
-    for (let x = 2; x < n; x++) {
-        if (n % x === 0) {
-            return false;
-        }
+  while(numPrimes <= maxPrimes) {
+    if(isPrime(iterator)) {
+      sum += iterator;
+      numPrimes++;
     }
-    return true;
+    iterator++;
+  }
+  return sum - 1;
 };
 
-let count = 0,
-    i = 0,
-    total = -1;
+var isPrime = function(num) {
+  var i = 2;
 
-while (count <= 1000) {
-    i++;
-
-    if (isPrime(i)) {
-        count++;
-        total += i;
+  for(i; i < num; i++) {
+    if(num % i === 0) {
+      return false;
     }
-}
+  }
+  return true;
+};
 
-console.log(total); // 3682913
+console.log(sumOfPrimes(1000, 0, 0, 1)); // 3682913
