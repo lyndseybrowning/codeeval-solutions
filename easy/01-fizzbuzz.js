@@ -1,16 +1,34 @@
 //https://www.codeeval.com/open_challenges/1/
-var fs  = require("fs");
-fs.readFileSync(process.argv[2]).toString().split('\n').forEach(function (line) {
-    if (line !== "") {
-        var sp = line.split(" "),
-        	x = sp[0],
-        	y = sp[1],
-        	t = sp[2],
-        	i, o = '';
-        for(i=1;i<=t;i+=1) {
-        	o+= (i % x === 0 && i % y === 0) ? 'FB' : (i % x === 0) ? 'F' : (i % y === 0) ? 'B' : i;
-        	o+= (i < t) ? ' ' : '';
+
+var fs  = require('fs');
+fs.readFileSync('test.txt').toString().split('\n').forEach(function (line) {
+    if (line !== '') {
+
+      var getArrayItem = function(arr, index) {
+        arr = arr.split(' ');
+        return arr[index];
+      };
+
+      var fizzBuzz = function(maxCount, firstDiv, secondDiv) {
+        var i = 1,
+            fizzBuzzArray = [];
+
+        while(i <= maxCount) {
+          if(i % firstDiv === 0 && i % secondDiv === 0) {
+            fizzBuzzArray.push('FB');
+          } else if (i % firstDiv === 0) {
+            fizzBuzzArray.push('F');
+          } else if (i % secondDiv === 0) {
+            fizzBuzzArray.push('B');
+          } else {
+            fizzBuzzArray.push(i);
+          }
+          i++;
         }
-        console.log(o);
+
+        return fizzBuzzArray.join(' ');
+      };
+
+      console.log(fizzBuzz(getArrayItem(line, 2), getArrayItem(line, 0), getArrayItem(line, 1)));
     }
 });
