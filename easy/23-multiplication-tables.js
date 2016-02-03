@@ -1,19 +1,29 @@
-//https://www.codeeval.com/open_challenges/23/
-var i = 1, out, max = 13;
+// https://www.codeeval.com/open_challenges/23/
 
-for(i;i<max;i++) {
-    out = '';
-    console.log(next(i, 1));
-}
+var getSpaces = function(n) {
+  return (' ').repeat(4 - n.toString().length);
+};
 
-function next(j,x) {
-    var n, len;
-    if(x < max) {
-        n = j*x;
-        len = n.toString().length;
-        out+=(n<100) ? ' ' : '';
-        out+= (len === 1) ? '  ' +n : ' '+n;
-        next(j, x+=1);
-    }
-    return out;
-}
+var multiplications = function(max, multiplies, divisor) {
+  divisor = divisor || 1;
+
+  if(divisor > max) {
+    return multiplies.join('\n');
+  }
+
+  var i = 1,
+      multiply,
+      multiplyArray = [];
+
+  while(i <= max) {
+    multiply = divisor * i;
+    multiplyArray.push((getSpaces(multiply)) + (multiply));
+    i++;
+  }
+
+  multiplies.push(multiplyArray.join(''));
+
+  return multiplications(max, multiplies, ++divisor);
+};
+
+console.log(multiplications(12, []));
