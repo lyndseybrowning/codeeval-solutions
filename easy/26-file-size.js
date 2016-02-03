@@ -1,5 +1,8 @@
-//https://www.codeeval.com/open_challenges/26/
-var fs  = require("fs");
-fs.stat(process.argv[2], function(e, s){
-	console.log(s.size);
-});
+// https://www.codeeval.com/open_challenges/26/
+
+var fs  = require('fs');
+var getFileSize = function(e, file) {
+ 	console.log(file.size);
+};
+
+fs.stat('test.txt', getFileSize);
