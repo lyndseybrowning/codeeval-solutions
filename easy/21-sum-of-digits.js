@@ -1,13 +1,15 @@
-//https://www.codeeval.com/open_challenges/21/
-var fs  = require("fs");
-fs.readFileSync(process.argv[2]).toString().split('\n').forEach(function (line) {
-    if (line !== "") {
-		line = line.split('');
+// https://www.codeeval.com/open_challenges/21/
 
-		var i = 0, total=0, len = line.length;
-		for(i;i<len;i++) {
-			total+=parseInt(line[i]);
-		}
-		console.log(total);
-	}
+var fs  = require("fs");
+fs.readFileSync('test.txt').toString().split('\n').forEach(function (line) {
+  if (line !== '') {
+
+    var sumOfDigits = function(digits) {
+      return digits.reduce(function(prev, current) {
+        return parseInt(prev, 10) + parseInt(current, 10);
+      });
+    };
+
+    console.log(sumOfDigits(line.split('')));
+  }
 });
