@@ -1,12 +1,8 @@
 //https://www.codeeval.com/open_challenges/8/
 
 var fs  = require("fs");
-fs.readFileSync(process.argv[2]).toString().split('\n').forEach(function (line) {
+fs.readFileSync('test.txt').toString().split('\n').forEach(function (line) {
     if (line !== '') {
-        console.log(reverse(line));
+      console.log(line.split(' ').reverse().join(' '));
     }
 });
-
-function reverse(arg) {
-    return arg.split(' ').reverse().join(' ');
-}

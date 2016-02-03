@@ -1,15 +1,20 @@
-//https://www.codeeval.com/open_challenges/19/
-var fs  = require("fs");
-fs.readFileSync(process.argv[2]).toString().split('\n').forEach(function (line) {
-    if (line !== "") {
-        line = line.split(',');
-        var num = line[0],
-            binaryStr = parseInt(num).toString(2),
-            n1 = line[1],
-            n2 = line[2],
-            p1 = binaryStr[binaryStr.length-n1],
-            p2 = binaryStr[binaryStr.length-n2];
+// https://www.codeeval.com/open_challenges/19/
 
-        console.log((p1 === p2) ? 'true' : 'false');
+var fs  = require("fs");
+fs.readFileSync('test.txt').toString().split('\n').forEach(function (line) {
+    if (line !== '') {
+        line = line.split(',');
+
+        var decToBinary = function(n) {
+          return n.toString(2);
+        };
+
+        var getBit = function(bits, position) {
+          return bits[bits.length - position];
+        };
+
+        var binaryStr = decToBinary(+line[0]);
+
+        console.log(getBit(binaryStr, line[1]) === getBit(binaryStr, line[2]) ? 'true' : 'false');
     }
 });
