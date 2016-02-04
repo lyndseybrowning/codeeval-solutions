@@ -1,6 +1,7 @@
-//https://www.codeeval.com/open_challenges/4/
+// https://www.codeeval.com/open_challenges/4/
 
 var sumOfPrimes = function(maxPrimes, numPrimes, sum, iterator) {
+  iterator = iterator || 1;
 
   while(numPrimes <= maxPrimes) {
     if(isPrime(iterator)) {
@@ -23,4 +24,4 @@ var isPrime = function(num) {
   return true;
 };
 
-console.log(sumOfPrimes(1000, 0, 0, 1)); // 3682913
+console.log(sumOfPrimes(1000, 0, 0)); // 3682913
