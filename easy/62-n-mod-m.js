@@ -1,12 +1,17 @@
-//https://www.codeeval.com/open_challenges/62/
-var fs  = require("fs");
-fs.readFileSync(process.argv[2]).toString().split('\n').forEach(function (line) {
-    var sp = line.split(","),
-    		n = Number(sp[0]),
-    		m = Number(sp[1]),
-    		mod = function(n, m) {
-    			return n - (Math.floor(n / m) * m);
-    		};
+// https://www.codeeval.com/open_challenges/62/
 
-    	console.log(mod(n,m));
+var fs  = require('fs');
+fs.readFileSync('test.txt').toString().split('\n').forEach(function (line) {
+  if(line !== '') {
+
+    var getDigit = function(str, index) {
+      return parseInt(str.split(',')[index], 10);
+		};
+
+    var getModulus = function(n, m) {
+      return n - (Math.floor(n / m) * m);
+    };
+
+    console.log(getModulus(getDigit(line, 0), getDigit(line, 1)));
+  }
 });
