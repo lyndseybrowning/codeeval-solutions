@@ -1,5 +1,7 @@
-//https://www.codeeval.com/open_challenges/25/
+// https://www.codeeval.com/open_challenges/25/
 
-for(var i = 1; i < 100; i+=2) {
-   console.log(i);
+var i = 1;
+while(i < 100) {
+  console.log(i);
+  i+=2;
 }
