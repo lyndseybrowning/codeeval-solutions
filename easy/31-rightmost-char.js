@@ -1,8 +1,17 @@
-//https://www.codeeval.com/open_challenges/31/
-var fs  = require("fs");
-fs.readFileSync(process.argv[2]).toString().split('\n').forEach(function (line) {
-    if (line !== "") {
-		line = line.split(',');
-		console.log(line[0].lastIndexOf(line[1]));
-	}
+// https://www.codeeval.com/open_challenges/31/
+
+var fs  = require('fs');
+fs.readFileSync('test.txt').toString().split('\n').forEach(function (line) {
+  if (line !== '') {
+
+    var getArray = function(str, separator) {
+      return str.split(separator);
+    };
+
+    var strArray = getArray(line, ','),
+        str = strArray[0],
+        char = strArray[1];
+
+    console.log(str.lastIndexOf(char));
+  }
 });
