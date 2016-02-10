@@ -1,30 +1,50 @@
-//https://www.codeeval.com/open_challenges/186/
+// https://www.codeeval.com/open_challenges/186/
 
-var fs  = require("fs");
-fs.readFileSync(process.argv[2]).toString().split('\n').forEach(function (line) {
-    if (line !== "") {
-    	var item = line.split(";"),
-    		numDays = item[0],
-    		figures = item[1].split(" "),
-    		i = 0,
-    		biggestGain = 0,
-    		temp = 0;
+var fs  = require('fs');
+fs.readFileSync('test.txt').toString().split('\n').forEach(function (line) {
+    if (line !== '') {
 
-    	while(i < figures.length-(numDays-1)) {
-    	   temp = checkAt(i);
-    	   if(temp > biggestGain) {
-    	       biggestGain = temp;
-    	   }
-    	   i++;
-    	}
-    	console.log(biggestGain);
-    }
+      var getArray = function(str, separator) {
+        return str.split(separator);
+      };
 
-    function checkAt(index) {
-    	var total = 0, i;
-    	for(i = index; i < parseInt(numDays)+index; i++) {
-    		total+= parseInt(figures[i]);
-    	}
-    	return total;
-    }
+      var getDigitsArray = function(str, separator) {
+        return str.split(separator).map(function(digit) {
+          return parseInt(digit, 10);
+        });
+      };
+
+      var getGain = function(figures) {
+        return figures.reduce(function(prev, current) {
+          return prev + current;
+        }, 0);
+      };
+
+      var findBiggestGain = function(figures, numDays) {
+        var biggestGain = 0;
+
+        // loop figures until it reaches max possible index to calculate from
+        figures.some(function(figure, index) {
+          // get next (n) days
+          var days = figures.slice(index, index + numDays),
+          // sum next (n) days
+              totalGain = getGain(days);
+
+          if(totalGain > biggestGain) {
+            biggestGain = totalGain;
+          }
+
+          // return if we can't go any further according to number of days
+          return index === figures.length - numDays;
+        });
+
+        return biggestGain;
+      };
+
+      var arr = getArray(line, ';'),
+          numDays = parseInt(arr[0], 10),
+          figures = getDigitsArray(arr[1], ' ');
+
+      console.log(findBiggestGain(figures, numDays));
+  }
 });
