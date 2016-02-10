@@ -1,17 +1,33 @@
-//https://www.codeeval.com/open_challenges/12/
+// https://www.codeeval.com/open_challenges/12/
 
-var fs  = require("fs");
-fs.readFileSync(process.argv[2]).toString().split('\n').forEach(function (line) {
-  line = line.trim();
+var fs  = require('fs');
+fs.readFileSync('test.txt').toString().split('\n').forEach(function (line) {
+  if (line !== '') {
+    var getArray = function(str) {
+      return str.split('');
+    };
 
-  if (line !== "") {
-        for(var i = 0, l = line.length; i<l; i++) {
-            var letter = line[i];
-            if(line.replace(letter, '').indexOf(letter) === -1) {
-                console.log(letter);
-                break;
-            }
+    var removeFromArray = function(arr, index) {
+      return arr.splice(index, 1);
+    };
 
-        }
-    }
+    var arrayCount = function(arr, char) {
+      return arr.filter(function(item, index) {
+        return item === char;
+      }).length;
+    };
+
+    var firstNonRepeatChar = function(chars) {
+      var first = '';
+
+      chars.some(function(char, index) {
+        first = char;
+        return arrayCount(chars, char) === 1;
+      });
+
+      return first;
+    };
+
+    console.log(firstNonRepeatChar(getArray(line)));
+  }
 });
