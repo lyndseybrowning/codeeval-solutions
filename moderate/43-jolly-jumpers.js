@@ -2,7 +2,7 @@
 
 var fs  = require('fs');
 fs.readFileSync('test.txt').toString().split('\n').forEach(function (line) {
-	if (line !== '') {
+  if(line !== '') {
     var getArray = function(str) {
       return str.split(' ').map(function(item) {
         return parseInt(item, 10);
@@ -36,7 +36,6 @@ fs.readFileSync('test.txt').toString().split('\n').forEach(function (line) {
 
       while(i < max) {
         if(differences.indexOf(i) === -1) {
-          console.log(digits, i);
           isJolly = false;
           break;
         }
