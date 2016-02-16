@@ -1,33 +1,50 @@
-//https://www.codeeval.com/open_challenges/43/
+// https://www.codeeval.com/open_challenges/43/
 
-var fs  = require("fs");
-fs.readFileSync(process.argv[2]).toString().split('\n').forEach(function (line) {
-    line = line.trim();
-	if (line !== "") {
-        var spl = line.split(" "),
-        	arr = [],
-        	n = 0,
-        	isJolly = true;
+var fs  = require('fs');
+fs.readFileSync('test.txt').toString().split('\n').forEach(function (line) {
+	if (line !== '') {
+    var getArray = function(str) {
+      return str.split(' ').map(function(item) {
+        return parseInt(item, 10);
+      });
+    };
 
-        for(var i=0, l=spl.length; i<l; i++) {
-        	var integer = parseInt(spl[i]);
-        	var next = parseInt(spl[i+1]);
+    var getDifference = function(digits) {
+      var differences = [],
+          digitsCount = digits.length - 1;
 
-        	if(integer > n) {
-        		n = integer;
-        	}
-
-        	if(!isNaN(next)) {
-                var sum = (next > integer) ? next-integer : integer-next;
-        		arr.push(sum);
-        	}
+      digits.forEach(function(digit, index) {
+        if(differences.length === digitsCount) {
+          return;
         }
-        for(var x=1; x<spl.length-1; x++) {
-        	if(-1 === arr.indexOf(x)) {
-        		isJolly = false;
-        		break;
-        	}
+
+        var nextDigit = digits[index + 1],
+            difference = Math.abs(digit - nextDigit);
+
+        differences.push(difference);
+      });
+
+      return differences;
+    };
+
+    var isJolly = function(arr) {
+      var max = arr[0], // number of iterations
+          digits = arr.slice(1, arr.length), // rest of the array
+          differences = getDifference(digits),
+          i = 1,
+          isJolly = true;
+
+      while(i < max) {
+        if(differences.indexOf(i) === -1) {
+          isJolly = false;
+          break;
         }
-        console.log(isJolly ? "Jolly" : "Not jolly");
-    }
+        i++;
+      }
+
+      return (isJolly) ? 'Jolly' : 'Not Jolly';
+    };
+
+    console.log(isJolly(getArray(line)));
+  }
 });
