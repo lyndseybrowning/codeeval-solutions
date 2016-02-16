@@ -36,13 +36,14 @@ fs.readFileSync('test.txt').toString().split('\n').forEach(function (line) {
 
       while(i < max) {
         if(differences.indexOf(i) === -1) {
+          console.log(digits, i);
           isJolly = false;
           break;
         }
         i++;
       }
 
-      return (isJolly) ? 'Jolly' : 'Not Jolly';
+      return (isJolly) ? 'Jolly' : 'Not jolly';
     };
 
     console.log(isJolly(getArray(line)));
